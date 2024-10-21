@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&display=swap');
+      body{
+          color: hsl(200, 15%, 8%);
+          font-family: "Nunito Sans";
+          background-color: hsl(0, 0%, 98%);
+      }
+      .navr{
+          text-align: center;
+          font-size: 15px;
+          font-weight: 1000;
+           cursor: pointer;
+      }
+      @media (min-width:768px){
+          .navr{
+              font-size: 25px;
+              
+          }
+      }
+      .input::placeholder {
+         color: hsl(0, 0%, 52%); 
+         opacity: 0.6;
+         font-weight: 600; 
+       }
+
+       .srch{
+        
+        color:#c8c8c8;
+       }
+       .light-2{
+        background-color:hsl(0, 0%, 100%) ;
+        color: hsl(200, 15%, 8%);
+       }
+       .night-1{
+        color: white;
+        transition: 1s ease;
+       }
+       .night-2{
+        background-color:hsl(209, 23%, 22%) ;
+        color: white;
+        border: hsl(209, 23%, 22%);
+        appearance: none;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        padding-right: 30px;
+        margin-top: 2px;
+        background-image: url('data:image/svg+xml;charset=US-ASCII,<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 20 20"><polygon fill="%23ffffff" points="0,0 10,10 20,0"/></svg>');
+        background-repeat: no-repeat;
+        background-position: right 18px center;
+        background-size: 11px;
+        transition: 1s ease;
+       }
+       .theme{
+        transition: 1s ease;
+       }
+       
+           .lds-hourglass,
+           .lds-hourglass:after {
+             box-sizing: border-box;
+           }
+           .lds-hourglass {
+             display: inline-block;
+             position: relative;
+             width: 80px;
+             height: 80px;
+           }
+           .lds-hourglass:after {
+             content: " ";
+             display: block;
+             border-radius: 50%;
+             width: 0;
+             height: 0;
+             margin: 8px;
+             box-sizing: border-box;
+             border: 32px solid currentColor;
+             border-color: currentColor transparent currentColor transparent;
+             animation: lds-hourglass 1.2s infinite;
+           }
+           @keyframes lds-hourglass {
+             0% {
+               transform: rotate(0);
+               animation-timing-function: cubic-bezier(0.55, 0.055, 0.675, 0.19);
+             }
+             50% {
+               transform: rotate(900deg);
+               animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
+             }
+             100% {
+               transform: rotate(1800deg);
+             }
+           }
+             
+           .loader {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: fixed;
+            left: 0;
+            right: 0;
+            top: 0px;
+            visibility: hidden;
+            transition:0.6s ease ;
+           }
+
+   </style>
+</head>
+<body>
+     
+    
+        <!-- Nav Bar -->   
+        <nav class="navbar shadow-sm py-3" style="background-color: hsl(0, 0%, 100%);">
+          <div class="d-flex container-fluid align-items-center justify-content-between mx-xl-5 mx-md-4 mx-1 mt-2">
+            <h1 class="navr fw-bolder">Where in the world ?</h1>
+            <span class=" navr h1 fw-semibold fs-md-5 fs-6 fw-bold" style="cursor: pointer;" id="home" onclick="changetheme(this.id)" ><i class="fa-regular fa-moon" ></i> Dark Mode</span>
+          </div>
+       </nav>
+       <!-- Nav Bar --> 
+
+       <!-- Content -->
+          <div class="row pt-5 m-0"  >
+
+            <!-- Search and Filter -->
+              <div class="  row d-flex justify-content-md-between justify-content-start-flex">
+                <div class="col-lg-4 col-md-6 col-12 ms-md-5 ms-3" >
+                    <div class="input-group input-group-lg flex-nowrap mb-5 mb-md-0 theme shadow-sm" style="position: relative;">
+                      <div class="card theme " style="width: 0rem; position: absolute ; top: 55px; z-index: 99; ">
+                        <ul class="list-group list-group-flush theme" id="searchList">
+                          
+                        </ul>
+                      </div>
+                        <span class="input-group-text border-1 theme" id="addon-wrapping" style="border-right: none; "><i class="fa-solid fa-magnifying-glass  fs-6 px-2 srch" ></i></span>
+                        <input type="search" class="form-control fs-6 p-3 input theme border-1" placeholder="Search for a country..."  aria-describedby="addon-wrapping" id="search" oninput="handleInput()" style="border-left: none; ">
+                      </div>
+                      
+                </div>
+                <div class="col-xl-2 col-md-4 col-sm-6 col-9 mb-4 mb-md-0 me-md-5 me-0 ms-md-0 ms-3">
+                    <select class="form-select form-select-lg mb-3 fs-6 p-3 fw-semibold shadow-sm  " aria-label="Large select example" id="Filter" onchange="filterbyRegion()" >
+                        <option selected>Filter by Region</option>
+                        <option>Africa</option>
+                        <option>Americas</option>
+                        <option>Asia</option>
+                        <option>Europe</option>
+                        <option>Oceania</option>
+                      </select>
+                </div>
+              </div>
+            <!-- Search and Filter -->  
+              
+
+
+            <!-- Cards -->
+               <div class="row  align-items-center justify-content-center p-0 m-0" id="Cards">
+                     
+                
+              
+              
+              
+
+
+               </div>
+               
+            <!-- Cards -->
+                
+
+
+          </div>
+        <!-- Content -->
+    
+
+        <!-- loading-->
+         <div class="loader" id="loader">
+          <div class="lds-hourglass"></div>
+         </div>
+        <!-- loading-->
+       
+
+
+<script src="node_modules/axios/dist/axios.min.js"></script>
+    <script src="node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="main.js"></script>
+    <script>
+      
+      getCountries();
+
+       // Search Country //
+       function handleInput() {
+            let input = document.getElementById("search").value;
+            let searchList = document.getElementById("searchList");
+             searchList.style.width = "21rem";
+            searchList.innerHTML = "";
+
+            if (input) {
+                axios.get("data.json")
+                .then(response => {
+                    const data = response.data;
+
+                    const matchedCountries = data.filter(country => 
+                        country.name.toLowerCase().includes(input.toLowerCase())
+                    );
+
+                    if (matchedCountries.length > 0) {
+                      for(let i=0 ; i < 8 ; i++ ){
+                        searchList.innerHTML += `<li class="list-group-item shadow fs-3" onclick=getCountryBySearch("${matchedCountries[i].alpha3Code}") style="cursor:pointer ;">${matchedCountries[i].name}</li>`;
+                      }
+                        
+                    } else {
+                        searchList.innerHTML = `<li class="list-group-item shadow fs-3">No matching countries !</li>`;
+                    }
+                })
+                
+            }
+        }
+
+       // <---Search Country---> //
+
+    // Filter by Region //
+        function filterbyRegion(){
+          toggleLoader(true);
+          let filtring = document.getElementById("Filter").value;
+          Cards = document.getElementById("Cards")
+          if(filtring !== "Filter by Region"){
+                Cards.innerHTML = "";
+                
+                axios.get("data.json")
+                .then(response=>{
+                  toggleLoader(false);
+                  let data = response.data
+                  
+                      let countries = data.filter(country => country.region == filtring )
+                  
+                  for( data of countries){
+                     Cards.innerHTML += `
+                         <div class="card col-md-3 col-2 mx-md-5 mx-2 mb-md-5 mb-4 mt-md-4 mt-2   shadow" style="width: 16.5rem;  padding: 0; cursor:pointer;" onclick="getCountry('${data.alpha3Code}')">
+                         <img src="${data.flags.png}" class="m-0 " style="height:150px">
+                         <div class="card-body mt-1" style="height:180px">
+                             <h2 class="card-title mb-3 fs-5 fw-bolder" > ${data.name}</h2>
+                             <p class="m-1 fs-6"><strong class="fw-bold">Population:</strong> ${data.population}</p>
+                             <p class="m-1 fs-6"><strong class="fw-bold">Region:</strong> ${data.region}</p>
+                                  <p class="m-1 fs-6"><strong class="fw-bold">Capital:</strong> ${data.capital}</p>
+                           </div>
+                      </div>` 
+                  } 
+                  modeTheme();
+                })  } else {
+                  getCountries();
+                  
+                }
+                    }
+        // <-- Filter by Region ---> //
+        
+
+        // theme // 
+        
+        modeTheme();
+        // <--- theme --->//
+    </script>
+</body>
+</html>
